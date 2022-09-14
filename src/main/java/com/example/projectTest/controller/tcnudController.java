@@ -2,9 +2,11 @@ package com.example.projectTest.controller;
 
 import com.example.projectTest.controller.dto.request.AddRequest;
 import com.example.projectTest.controller.dto.request.UnrealProfitRequest;
+import com.example.projectTest.controller.dto.request.UpdateMstmbRequest;
 import com.example.projectTest.controller.dto.response.SumResponse;
 import com.example.projectTest.controller.dto.response.TransactionResponse;
 import com.example.projectTest.service.UnrealProfitService;
+import com.example.projectTest.service.UpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +20,9 @@ public class tcnudController {
 
     @Autowired
     UnrealProfitService unrealProfitService;
+
+    @Autowired
+    UpdateService updateService;
 
     @PostMapping("/detail")
     public TransactionResponse getUnrealList(@RequestBody UnrealProfitRequest request){
@@ -35,5 +40,10 @@ public class tcnudController {
     public TransactionResponse getAddList(@RequestBody AddRequest request){
         return unrealProfitService.addHcmioAndTcnud(request);
 
+    }
+
+    @PostMapping("/update")
+    public String updateCurPrice(@RequestBody UpdateMstmbRequest request){
+        return updateService.update(request);
     }
 }
